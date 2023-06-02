@@ -1,5 +1,21 @@
 WITH source as (
-    SELECT * FROM {{source('northwind', 'products')}}
+    SELECT 
+        cast(supplier_ids as integer) as supplier_id,
+        id,
+        product_code,
+        product_name,
+        description,
+        standard_cost,
+        list_price,
+        reorder_level,
+        target_level,
+        quantity_per_unit,
+        discontinued,
+        minimum_reorder_quantity,
+        category,
+        attachments
+     FROM {{source('northwind', 'products')}}
+     WHERE supplier_ids not like '%;%'
 )
 SELECT 
         *,
